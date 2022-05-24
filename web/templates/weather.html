@@ -1,0 +1,516 @@
+<!-- /*
+* Template Name: LuxuryHotel
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+ {% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500i,700|Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static '/css/font-awesome.css' %}">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/intro_new.css' %}">
+  <link rel="stylesheet" href="{% static '/css/vendor/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/vendor/bootstrap.css' %}">
+
+    <!-- Theme Style -->
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/intro_new.css' %}">
+
+    <title>Style by Weather</title>
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+  <style>
+      #tempinfo {
+        width: 100px;
+        margin : 0 auto;
+      }
+
+      #country {font-size:250%;}
+    .streetfashion-parent {
+             display: flex;
+                }
+    .streetfashion {
+            flex: 1;
+            }
+    .padding {
+            padding: 10px;
+            padding-top: 25px;
+            padding-right: 1px;
+            padding-bottom: 50px;
+            padding-left: 1px;}
+        
+        
+    .container img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        }
+      #city {
+        font-family: 'Grand Hotel', cursive;
+        font-size: 75px ;
+        color: white;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 400;
+         margin: 30px 0 15px;
+         line-height: 1;
+         margin: 0.67em 0;
+      }
+      #temp {
+        font-family: 'Grand Hotel', cursive;
+        color:aliceblue
+      }
+      .untree_co--site-logo{
+        font-family: 'Grand Hotel', cursive;
+        font-size: 30px ;
+      }
+    
+      
+      .zoom {
+            /* width: 500px;
+            height: 750px;
+            margin: 0 auto; */
+      }
+
+      .zoom:hover {
+            transform: scale(1.20);
+            transition: 0.5s;
+      }
+      
+      .child {
+        flex :1;
+      }
+  </style>
+  <script>
+    /*
+    $.getJSON("파일경로", function(data){
+        //data로 할일...
+    });
+    */
+    country = JSON.parse(localStorage.getItem("city"));
+    gender = JSON.parse(localStorage.getItem("gender"));
+  
+    var country_api = "http://api.openweathermap.org/data/2.5/weather?q="+country+"&appid=271c1b260d47e71d0aa0c938814a47ac&units=metric";
+    $.getJSON(
+        country_api,
+        function(data){
+        //data로 할일...
+        //alert(data.list[0].main.temp);
+        var $now = new Date($.now());
+        var month = $now.getMonth()+1;
+        var $cTemp = data.main.temp;
+        var $maxTemp = data.main.temp_max;
+        var $minTemp = data.main.temp_min;
+        var $cDate = $now.getFullYear() + '/' + month + '/' +$now.getDate() + '/' +$now.getHours() +':'+ $now.getMinutes();
+        var $wIcon = data.weather[0].icon;
+        var $s_country = data.sys.country;
+        upcountry = country.substring(0, 1).toUpperCase()+country.substring(1);
+        $currentTemp = Math.round($cTemp);
+        //Date.now(); == $.now
+        //new Date(Date.now());
+        // .getFullYear() 년도
+        // .getMonth() 달, .getDate() 날짜
+        // .getHours() 시간, .getMinutes() 분
+        //alert(new Date($.now()));
+   
+        if ($wIcon == "01n"){
+          weather_image = document.getElementById("weather_image");
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/01n.jpg)"
+        }
+        if ($wIcon == "02n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/02n.jpg)"
+        }
+        if ($wIcon == "03n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/03n.jpg)"
+        }
+        if ($wIcon == "04n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/04n.jpg)"
+        }
+        if ($wIcon == "09n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/9n.jpg)"
+        }
+        if ($wIcon == "10n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/10n.jpg)"
+        }
+        if ($wIcon == "11n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/11n.jpg)"
+        }
+        if ($wIcon == "13n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/13n.jpg)"
+        }
+        if ($wIcon == "50n"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/50n.jpg)"
+        }
+        if ($wIcon == "01d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/01d.jpg)"
+          
+        }
+        if ($wIcon == "02d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/02d.jpg)"
+        }
+        if ($wIcon == "03d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/03d.jpg)"
+        }
+        if ($wIcon == "04d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/04d.jpg)"
+        }
+        if ($wIcon == "09d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/09d.jpg)"
+        }
+        if ($wIcon == "10d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/10d.jpg)"
+        }
+        if ($wIcon == "11d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/11d.jpg)"
+        }
+        if ($wIcon == "13d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/13d.jpg)"
+        }
+        if ($wIcon == "50d"){
+          document.getElementById('weather_image').style.backgroundImage="url(/static/images/weather/50d.jpg)"
+        }
+
+      
+        //A.appendTo(B) B요소의 내용의 뒤에 A를 추가
+        //A.append(B) A요소의 내용의 뒤에 B를 추가
+        //A.prependTo(B) B요소의 내용의 앞에 A를 추가
+        //A.prepend(B) A요소의 내용의 앞에 B를 추가
+        var gen = gender.toLowerCase();
+        $('.cicon').prepend(upcountry);
+        $('.cicon').append($s_country);
+        $('.ctemp').append($currentTemp);
+
+        // $('h2').prepend($cDate);
+        $('.ctempinfo').append('<img src="http://openweathermap.org/img/wn/'+ $wIcon +'@2x.png" />');
+
+        if(gen == "female"){
+          if ($cTemp <= 4){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f-4/_4_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 4 && $cTemp <= 8){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f5-8/5_8_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 8 && $cTemp <= 11){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f9-11/9_11_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 11 && $cTemp <= 16){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f12-16/12_16_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 16 && $cTemp <= 19){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f17-19/17_19_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 19 && $cTemp <= 22){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f20-22/20_22_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 22 && $cTemp <=27){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f23-27/23_27_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 28){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/f28-/28_"+i+".jpg"
+            }
+          }
+         }
+
+         if(gen == "male"){
+          if ($cTemp <= 4){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m-4/_4_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 4 && $cTemp <= 8){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m5-8/5_8_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 8 && $cTemp <= 11){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m9-11/9_11_"+i+".jpeg"
+            }
+          }
+          if ($cTemp > 11 && $cTemp <= 16){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m12-16/12_16_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 16 && $cTemp <= 19){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m17-19/17_19_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 19 && $cTemp <= 22){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m20-22/20_22_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 22 && $cTemp <=27){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m23-27/23_27_"+i+".jpg"
+            }
+          }
+          if ($cTemp > 28){
+            for(var i=1; i<9; i++) {
+              document.getElementById('daily'+i).src="/static/images/m28/28_"+i+".jpeg"
+            }
+          }
+         }
+    
+    
+          if ($wIcon == "09d" || $wIcon == "9n"  ){
+                          
+                            document.getElementById("umbrella").innerText= "And please don't forget your umbrella";
+                            
+                          
+                            
+          
+                          }
+    
+    
+    
+        }
+                 
+    );
+  </script>
+  </head>
+
+  <body>
+        
+    <nav class="untree_co--site-mobile-menu">
+      <div class="close-wrap d-flex">
+        <a href="#" class="d-flex ml-auto js-menu-toggle">
+          <span class="close-label">Close</span>
+          <div class="close-times">
+            <span class="bar1"></span>
+            <span class="bar2"></span>
+          </div>
+        </a>
+      </div>
+      <div class="site-mobile-inner"></div>
+    </nav>
+
+
+    <div class="untree_co--site-wrap">
+      <nav class="untree_co--site-nav js-sticky-nav">
+         <div class="container d-flex align-items-center">
+           <div class="logo-wrap">
+             <a href="/" class="untree_co--site-logo">Style by Weather</a>
+           </div>
+           
+           <div class="icons-wrap text-md-right">
+             <ul class="icons-top d-none d-lg-block">
+               <li>
+                 <a href="http://google.com"><span class="icon-google"></span></a>
+               </li>
+               <li>
+                 <a href="http://facebook.com"><span class="icon-facebook"></span></a>
+               </li>
+               <li>
+                 <a href="http://twitter.com"><span class="icon-twitter"></span></a>
+               </li>
+               <li>
+                 <a href="http://instagram.com"><span class="icon-instagram"></span></a>
+               </li>
+             </ul>
+ 
+             <!-- Mobile Toggle -->
+             <a href="#" class="d-block d-lg-none burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+               <span></span>
+             </a>
+           </div>
+         </div>
+       </nav>
+
+      <main class="site-untree_co--main">
+        <div class="untree_co--site-hero inner-page" id="weather_image">
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-7 text-center">
+                <div class="site-hero-contents" data-aos="fade-up">
+                  <h1 id="city" class="logo cursive">
+                    <div class="cicon"> , </div></h1>
+                      <div class="content">
+                        <h2 class="ctemp" id="temp" style="font-size: 5cm;"></h2>
+                        <div id="tempinfo" class="ctempinfo"></div>
+                        </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="untree_co--site-section">
+
+          <div class="shit" width = "3000px">       
+              <h1 id="country" class="logo cursive" style ="color:black; text-align: center;">
+                  <div>This is what to wear.</div></h1>
+                  
+                  <h2 id="umbrella"style="text-align: center;"></h2>
+             
+                  
+                  
+                   
+      <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
+      <marquee direction="left" itemid="" behavior="scroll" vspace="50px" scrollamount="20" scrolldelay ="100" width="3500" height="630" onMouseOver='this.stop();' onMouseOut='this.start();' bgColor="#e6e6e6" loop="infinite">
+        <div class = "row">
+            
+              
+                <div class="child zoom" >
+                    
+                  <img src="" id="daily1" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%" >
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily2" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily3" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily4" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily5" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                  
+                  <img src="" id="daily6" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily7" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+                <div class="child zoom">
+                    
+                  <img src="" id="daily8" style="padding-top: 30px;" alt="flowers" width="380" height="600" style = "max-width: 100%">
+                    
+                </div>
+
+              </div>
+
+        </div>
+    </marquee> 
+          
+        <div class="untree_co--site-section py-5 bg-body-darker cta">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3 class="m-0 p-0">If you have any special requests, please feel free to call us. <a href="tel://+123456789012">+12.345.678.9012</a></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </main>
+      <footer class="untree_co--site-footer">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 pr-md-5">
+              <h3>About Us</h3>
+              <p>Style by Weather is an app that provides style information according to current temperature.</p>
+            </div>
+            <div class="col-md-8 ml-auto">
+              <div class="row">
+                <div class="col-md-9 ml-auto">
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <h3>Address</h3>
+                      <address>KR Busan. <br> Namgu PKNU, 48547</address>
+                    </div>
+                    <div class="col-md-6">
+                      <h3>Telephone</h3>
+                      <p>
+                        <a href="#">+1 234 5678 910</a> <br>
+                        <a href="#">+2 234 5678 910</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 pt-5 align-items-center">
+            <div class="col-md-6 text-md-left">
+              <!-- Link back to Untree.co can't be removed. Template is licensed under CC BY 3.0. If you purchased a license you can remove this. -->
+              <p>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="index.html">Untree.co</a>. All Rights Reserved. Design by <a href="https://untree.co/" target="_blank" class="text-primary">Untree.co</a>
+              </p>
+            <!-- Link back to Untree.co can't be removed. Template is licensed under CC BY 3.0. If you purchased a license you can remove this. -->
+            </div>
+            <div class="col-md-6 text-md-right">
+              <ul class="icons-top icons-dark">
+              <li>
+                <a href="http://facebook.com"><span class="icon-facebook"></span></a>
+              </li>
+              <li>
+                <a href="http://twitter.com"><span class="icon-twitter"></span></a>
+              </li>
+              <li>
+                <a href="http://instagram.com"><span class="icon-instagram"></span></a>
+              </li>
+              <li>
+                <a href="https://www.tripadvisor.co.kr/"><span class="icon-tripadvisor"></span></a>
+              </li>
+            </ul>
+
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <!-- Search -->
+    <div class="search-wrap">
+      <a href="#" class="close-search js-search-toggle">
+        <span>Close</span>
+      </a>
+      <div class="container">
+        <div class="row justify-content-center align-items-center text-center">
+          <div class="col-md-12">
+            <form action="#">
+              <input type="search" name="s" id="s" placeholder="Type a keyword and hit enter..."  autocomplete="false">
+            </form>    
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="{% static '/js/ScrollMagic.min.js' %}"></script>
+    <script src="{% static '/js/jquery.sticky.js' %}"></script>
+    <script src="{% static '/js/jquery.lettering.js' %}"></script>
+
+  </body>
+</html>

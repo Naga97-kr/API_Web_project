@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록</title>
+    <link rel="stylesheet" href="{% static '/css/style.board.css' %}">
+    <link rel="stylesheet" href="{% static '/css/media.css' %}">
+    <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet" />
+	<link href="{% static '/css/coming-sssoon.css' %}" rel="stylesheet" /> 
+    
+    <!--     Fonts     -->
+    <link href="{% static '/css/font-awesome.css' %}" rel="stylesheet">
+    <style>
+        #report1 {
+      background-image: url("/static/images/style.jpg");
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">  
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--<ul class="nav navbar-nav">
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                      <img src="images/flags/US.png"/>
+                      English(US) 
+                      <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><img src="images/flags/DE.png"/> Deutsch</a></li>
+                      <li><a href="#"><img src="images/flags/GB.png"/> English(UK)</a></li>
+                      <li><a href="#"><img src="images/flags/FR.png"/> Français</a></li>
+                      <li><a href="#"><img src="images/flags/RO.png"/> Română</a></li>
+                      <li><a href="#"><img src="images/flags/IT.png"/> Italiano</a></li>
+                      
+                      <li class="divider"></li>
+                      <li><a href="#"><img src="images/flags/ES.png"/> Español <span class="label label-default">soon</span></a></li>
+                      <li><a href="#"><img src="images/flags/BR.png"/> Português <span class="label label-default">soon</span></a></li>
+                      <li><a href="#"><img src="images/flags/JP.png"/> 日本語 <span class="label label-default">soon</span></a></li>
+                      <li><a href="#"><img src="images/flags/TR.png"/> Türkçe <span class="label label-default">soon</span></a></li>
+                   
+                    </ul>
+              </li>
+            
+            </ul>-->
+            <ul class="nav navbar-nav navbar-right">
+                  <!--<li>
+                      <a href="#"> 
+                          <i class="fa fa-facebook-square"></i>
+                          Join
+                      </a>
+                  </li>-->
+                  <li>
+                    <a href="http://mysite.com:8000/login/">
+                        <i class="joinform"></i>
+                        Home
+                    </a>
+                </li>
+                 <li>
+                    <a href="http://mysite.com:8000/login/"> 
+                        <i class="loginform"></i>
+                        Login
+                    </a>
+                </li>
+                <li>
+                  <a href="http://mysite.com:8000/web/register/"> 
+                      <i class="signupform"></i>
+                      Sign Up
+                  </a>
+                </li>
+             </ul>
+            
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+      <div class="main" id="report1">
+      
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>자유게시판</strong>
+            <p>원하는 게시글을 올리실 수 있습니다.</p>
+        </div>
+        <div class="board_list_wrap">
+            <div class="board_list">
+                <div class="top">
+                    <thead>
+                    <tr>
+                        <div class="num">번호</div>
+                        <div class="date">제목</div>
+                        <div class="title">내용</div>
+                    </tr>
+                    </thead>
+                </div>
+                {% for i in board %}
+                <tbody>
+                <tr>
+                    <div>
+                        <div class="num"><td>{{ i.id }}</td></div>
+                        <div class="date"><td>{{ i.title }}</td></div>
+                        <div class="title"><td>{{ i.content }}</td></div>
+                    </div>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </div>
+            <div class="board_page">
+            {% csrf_token %}
+            </div>
+            <div class="bt_wrap">
+                <a href="http://mysite.com:8000/bd_write/" class="on">등록</a>
+                <!--<a href="#">수정</a>-->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
